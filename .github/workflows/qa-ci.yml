@@ -56,14 +56,12 @@ jobs:
               '  <head>' \
               '    <meta charset="utf-8" />' \
               '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
-              '    <title>QA Reports</title>' \
+              '    <title>Redirecting to Summary Report</title>' \
+              '    <meta http-equiv="refresh" content="0; url=./cypress/reports/summary.html" />' \
               '  </head>' \
               '  <body>' \
-              '    <h1>QA Reports</h1>' \
-              '    <ul>' \
-              '      <li><a href="./cypress/reports/summary.html">Open Summary Report</a></li>' \
-              '      <li><a href="./cypress/reports/mochawesome/mochawesome.html">Open Mochawesome Report</a></li>' \
-              '    </ul>' \
+              '    <script>window.location.replace("./cypress/reports/summary.html");</script>' \
+              '    <p>Redirecting to Summary Report... <a href="./cypress/reports/summary.html">Click here if you are not redirected.</a></p>' \
               '  </body>' \
               '</html>' > site/index.html
           elif [ -f site/cypress/reports/mochawesome/mochawesome.html ]; then
@@ -73,11 +71,12 @@ jobs:
               '  <head>' \
               '    <meta charset="utf-8" />' \
               '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
-              '    <title>QA Reports</title>' \
+              '    <title>Redirecting to Mochawesome Report</title>' \
+              '    <meta http-equiv="refresh" content="0; url=./cypress/reports/mochawesome/mochawesome.html" />' \
               '  </head>' \
               '  <body>' \
-              '    <h1>QA Reports</h1>' \
-              '    <a href="./cypress/reports/mochawesome/mochawesome.html">Open Mochawesome Report</a>' \
+              '    <script>window.location.replace("./cypress/reports/mochawesome/mochawesome.html");</script>' \
+              '    <p>Redirecting to Mochawesome Report... <a href="./cypress/reports/mochawesome/mochawesome.html">Click here if you are not redirected.</a></p>' \
               '  </body>' \
               '</html>' > site/index.html
           else
