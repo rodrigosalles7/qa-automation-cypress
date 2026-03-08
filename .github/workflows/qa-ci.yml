@@ -50,19 +50,18 @@ jobs:
           elif [ -f site/mochawesome/mochawesome.html ]; then
             cp site/mochawesome/mochawesome.html site/index.html
           else
-            cat > site/index.html << 'HTML'
-            <!doctype html>
-            <html lang="en">
-              <head>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>QA Reports</title>
-              </head>
-              <body>
-                <h1>QA reports were not generated in this run.</h1>
-              </body>
-            </html>
-            HTML
+            printf '%s\n' \
+              '<!doctype html>' \
+              '<html lang="en">' \
+              '  <head>' \
+              '    <meta charset="utf-8" />' \
+              '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
+              '    <title>QA Reports</title>' \
+              '  </head>' \
+              '  <body>' \
+              '    <h1>QA reports were not generated in this run.</h1>' \
+              '  </body>' \
+              '</html>' > site/index.html
           fi
 
           touch site/.nojekyll

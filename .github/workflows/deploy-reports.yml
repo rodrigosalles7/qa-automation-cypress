@@ -39,19 +39,18 @@ jobs:
           mkdir -p reports
 
           if [ ! -f reports/index.html ]; then
-            cat > reports/index.html << 'HTML'
-            <!doctype html>
-            <html lang="en">
-              <head>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>QA Reports</title>
-              </head>
-              <body>
-                <h1>QA reports are not available for this run.</h1>
-              </body>
-            </html>
-            HTML
+            printf '%s\n' \
+              '<!doctype html>' \
+              '<html lang="en">' \
+              '  <head>' \
+              '    <meta charset="utf-8" />' \
+              '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
+              '    <title>QA Reports</title>' \
+              '  </head>' \
+              '  <body>' \
+              '    <h1>QA reports are not available for this run.</h1>' \
+              '  </body>' \
+              '</html>' > reports/index.html
           fi
 
           touch reports/.nojekyll
