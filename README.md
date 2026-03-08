@@ -47,6 +47,16 @@ Install the following tools before running the project:
 - npm 10+
 - Git
 
+### Linux (Ubuntu)
+
+- Recommended shell: `bash`
+- All commands in this README run as-is.
+
+### Windows
+
+- Recommended shells: **Git Bash** or **WSL**
+- If using **PowerShell/CMD**, see the Windows-specific run flow below.
+
 Quick version check:
 
 ```bash
@@ -68,6 +78,16 @@ Repository URL:
 
 ## Installation
 
+### Linux (Ubuntu)
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Windows
+
 Install dependencies:
 
 ```bash
@@ -87,6 +107,20 @@ Runs all tests (API + frontend), generates summary, and returns Cypress exit cod
 
 ```bash
 npm test
+```
+
+#### Linux (Ubuntu)
+
+Use the command above directly.
+
+#### Windows
+
+- **Git Bash / WSL**: use the same command above (`npm test`).
+- **PowerShell / CMD**: run in two steps (equivalent flow):
+
+```bash
+npm run cy:run
+npm run cy:report:summary
 ```
 
 ### Open Cypress UI
@@ -123,16 +157,37 @@ All tests:
 npm run cy:run:report
 ```
 
+Linux (Ubuntu): run as-is.
+
+Windows:
+
+- Git Bash / WSL: run as-is.
+- PowerShell / CMD: use the equivalent two-step flow below.
+
 API only:
 
 ```bash
 npm run cy:run:report:api
 ```
 
+PowerShell / CMD equivalent:
+
+```bash
+npm run cy:run:api
+npm run cy:report:summary
+```
+
 Frontend only:
 
 ```bash
 npm run cy:run:report:frontend
+```
+
+PowerShell / CMD equivalent:
+
+```bash
+npm run cy:run:frontend
+npm run cy:report:summary
 ```
 
 Generate summary only from existing results:
