@@ -39,16 +39,47 @@ jobs:
       - name: Prepare site artifact
         if: always()
         run: |
-          mkdir -p site
+          mkdir -p site/cypress
 
           if [ -d cypress/reports ]; then
-            cp -R cypress/reports/. site/
+            cp -R cypress/reports site/cypress/reports
           fi
 
-          if [ -f site/summary.html ]; then
-            cp site/summary.html site/index.html
-          elif [ -f site/mochawesome/mochawesome.html ]; then
-            cp site/mochawesome/mochawesome.html site/index.html
+          if [ -d cypress/screenshots ]; then
+            cp -R cypress/screenshots site/cypress/screenshots
+          fi
+
+          if [ -f site/cypress/reports/summary.html ]; then
+            printf '%s\n' \
+              '<!doctype html>' \
+              '<html lang="en">' \
+              '  <head>' \
+              '    <meta charset="utf-8" />' \
+              '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
+              '    <title>QA Reports</title>' \
+              '  </head>' \
+              '  <body>' \
+              '    <h1>QA Reports</h1>' \
+              '    <ul>' \
+              '      <li><a href="./cypress/reports/summary.html">Open Summary Report</a></li>' \
+              '      <li><a href="./cypress/reports/mochawesome/mochawesome.html">Open Mochawesome Report</a></li>' \
+              '    </ul>' \
+              '  </body>' \
+              '</html>' > site/index.html
+          elif [ -f site/cypress/reports/mochawesome/mochawesome.html ]; then
+            printf '%s\n' \
+              '<!doctype html>' \
+              '<html lang="en">' \
+              '  <head>' \
+              '    <meta charset="utf-8" />' \
+              '    <meta name="viewport" content="width=device-width, initial-scale=1" />' \
+              '    <title>QA Reports</title>' \
+              '  </head>' \
+              '  <body>' \
+              '    <h1>QA Reports</h1>' \
+              '    <a href="./cypress/reports/mochawesome/mochawesome.html">Open Mochawesome Report</a>' \
+              '  </body>' \
+              '</html>' > site/index.html
           else
             printf '%s\n' \
               '<!doctype html>' \
@@ -71,8 +102,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cypress-reports
-          path: cypress/reports
-          if-no-files-found: warn
+          path: |
+            cypress/reports
+            cypress/screenshots
+          if-no-files-found: ignore
           retention-days: 14
 
       - name: Upload Pages site artifact
