@@ -1,0 +1,25 @@
+{
+  "name": "qa-automation-cypress",
+  "version": "1.0.0",
+  "description": "Cypress E2E and API automation challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run; STATUS=$?; npm run cy:report:summary; exit $STATUS",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:frontend": "cypress run --spec cypress/e2e/frontend/**/*.cy.js",
+    "cy:run:api": "cypress run --spec cypress/e2e/api/**/*.cy.js",
+    "cy:report:summary": "node scripts/generate-report-summary.js",
+    "cy:run:report": "cypress run; STATUS=$?; npm run cy:report:summary; exit $STATUS",
+    "cy:run:report:frontend": "cypress run --spec cypress/e2e/frontend/**/*.cy.js; STATUS=$?; npm run cy:report:summary; exit $STATUS",
+    "cy:run:report:api": "cypress run --spec cypress/e2e/api/**/*.cy.js; STATUS=$?; npm run cy:report:summary; exit $STATUS"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.11.0",
+    "cypress-mochawesome-reporter": "^4.0.2"
+  }
+}

@@ -1,0 +1,10 @@
+node_modules/
+
+# Cypress artifacts
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+cypress/reports/
+
+# Logs
+npm-debug.log*
