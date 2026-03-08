@@ -1,0 +1,72 @@
+name: Deploy Test Reports to GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ["QA CI Pipeline"]
+    types:
+      - completed
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Reports to GitHub Pages
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure' }}
+
+    steps:
+      - name: Download site artifact from CI run
+        id: download_site
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: cypress-pages-site
+          path: reports
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Ensure fallback index exists
+        if: always()
+        run: |
+          mkdir -p reports
+
+          if [ ! -f reports/index.html ]; then
+            cat > reports/index.html << 'HTML'
+            <!doctype html>
+            <html lang="en">
+              <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <title>QA Reports</title>
+              </head>
+              <body>
+                <h1>QA reports are not available for this run.</h1>
+              </body>
+            </html>
+            HTML
+          fi
+
+          touch reports/.nojekyll
+
+          echo "Files to publish:"
+          find reports -maxdepth 3 -type f | sort
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reports
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

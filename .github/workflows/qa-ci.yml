@@ -1,0 +1,90 @@
+name: QA CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cypress-tests:
+    name: Run Cypress tests and generate reports
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        id: run_tests
+        continue-on-error: true
+        run: npm test
+
+      - name: Prepare site artifact
+        if: always()
+        run: |
+          mkdir -p site
+
+          if [ -d cypress/reports ]; then
+            cp -R cypress/reports/. site/
+          fi
+
+          if [ -f site/summary.html ]; then
+            cp site/summary.html site/index.html
+          elif [ -f site/mochawesome/mochawesome.html ]; then
+            cp site/mochawesome/mochawesome.html site/index.html
+          else
+            cat > site/index.html << 'HTML'
+            <!doctype html>
+            <html lang="en">
+              <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <title>QA Reports</title>
+              </head>
+              <body>
+                <h1>QA reports were not generated in this run.</h1>
+              </body>
+            </html>
+            HTML
+          fi
+
+          touch site/.nojekyll
+
+      - name: Upload reports artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-reports
+          path: cypress/reports
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload Pages site artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-pages-site
+          path: site
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Fail workflow if tests failed
+        if: steps.run_tests.outcome == 'failure'
+        run: exit 1
