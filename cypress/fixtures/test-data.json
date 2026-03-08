@@ -1,0 +1,83 @@
+{
+    "api": {
+        "statusCodes": {
+            "ok": 200,
+            "created": 201,
+            "badRequest": 400,
+            "unauthorized": 401
+        },
+        "messages": {
+            "created": "Cadastro realizado com sucesso",
+            "duplicateEmail": "Este email já está sendo usado",
+            "updated": "Registro alterado com sucesso",
+            "deletedOrNoop": "Registro excluído com sucesso|Nenhum registro excluído",
+            "userNotFound": "Usuário não encontrado",
+            "productNotFound": "Produto não encontrado",
+            "loginSuccess": "Login realizado com sucesso",
+            "invalidCredentials": "Email e/ou senha inválidos",
+            "missingToken": "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais",
+            "cartNotFoundForUser": "Não foi encontrado carrinho para esse usuário",
+            "cartCheckoutSuccess": "Registro excluído com sucesso",
+            "cartCancelAndRestock": "Registro excluído com sucesso. Estoque dos produtos reabastecido"
+        },
+        "users": {
+            "defaultCreateName": "CRUD User",
+            "defaultUpdatedName": "CRUD User Updated",
+            "defaultAdminFlag": "false"
+        },
+        "products": {
+            "withoutAuthPayload": {
+                "price": 120,
+                "description": "Unauthorized product",
+                "quantity": 5
+            },
+            "updatePayload": {
+                "price": 330,
+                "description": "API product updated description",
+                "quantity": 30,
+                "nameSuffix": "-updated"
+            },
+            "defaultPayload": {
+                "price": 310,
+                "description": "API product description",
+                "quantity": 25
+            }
+        },
+        "carts": {
+            "defaultItemQuantity": 1,
+            "users": {
+                "creator": "Cart User",
+                "reader": "Cart User Reader",
+                "checkout": "Cart User Checkout",
+                "withoutCart": "Cart User Without Cart",
+                "cancel": "Cart User Cancel"
+            }
+        },
+        "tokens": {
+            "loginBearerRegex": "^Bearer\\s.+"
+        }
+    },
+    "frontend": {
+        "messages": {
+            "duplicateEmail": "Este email já está sendo usado",
+            "created": "Cadastro realizado com sucesso"
+        },
+        "users": {
+            "existingFrontendUserName": "Existing Frontend User",
+            "duplicateFrontendUserName": "Duplicate Frontend User",
+            "adminCreatedUserName": "Admin Created User"
+        },
+        "products": {
+            "register": {
+                "price": 125,
+                "description": "Frontend created product",
+                "quantity": 12
+            },
+            "knownCatalogProduct": "Logitech"
+        },
+        "routes": {
+            "home": "/home",
+            "login": "/login"
+        }
+    }
+}

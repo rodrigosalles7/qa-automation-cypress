@@ -1,0 +1,115 @@
+{
+  "validAdmin": {
+    "email": "fulano@qa.com",
+    "password": "teste"
+  },
+  "validNonAdmin": {
+    "email": "ciclano@qa.com",
+    "password": "teste"
+  },
+  "frontendUserTemplate": {
+    "name": "Frontend User",
+    "password": "Test@123",
+    "isAdmin": false
+  },
+  "frontendAdminTemplate": {
+    "name": "Frontend Admin User",
+    "password": "Admin@123",
+    "isAdmin": true
+  },
+  "apiUserTemplate": {
+    "name": "API Automation User",
+    "password": "Test@123",
+    "isAdmin": false
+  },
+  "apiAdminTemplate": {
+    "name": "API Automation Admin",
+    "password": "Admin@123",
+    "isAdmin": true
+  },
+  "invalidCredentials": {
+    "wrongPassword": "wrong-password",
+    "emptyPassword": "",
+    "invalidEmail": "invalid.user@qa.com",
+    "nonExistingEmail": "not-found-user@qa.com"
+  },
+  "userProfiles": {
+    "basic": {
+      "name": "Basic User",
+      "password": "Test@123",
+      "isAdmin": false
+    },
+    "admin": {
+      "name": "Admin User",
+      "password": "Admin@123",
+      "isAdmin": true
+    },
+    "specialChars": {
+      "name": "Usuário Çedilha Áccent",
+      "password": "T3st!@#",
+      "isAdmin": false
+    },
+    "longName": {
+      "name": "Usuario Com Nome Muito Longo Para Validacao De Campos De Cadastro",
+      "password": "Test@123",
+      "isAdmin": false
+    }
+  },
+  "invalidUserPayloads": {
+    "withoutName": {
+      "password": "Test@123",
+      "isAdmin": false
+    },
+    "withoutPassword": {
+      "name": "User Without Password",
+      "isAdmin": false
+    },
+    "invalidEmailFormat": {
+      "name": "User Invalid Email",
+      "email": "invalid-email-format",
+      "password": "Test@123",
+      "isAdmin": false
+    }
+  },
+  "searchUsers": [
+    {
+      "name": "Fulano",
+      "email": "fulano@qa.com"
+    },
+    {
+      "name": "Ciclano",
+      "email": "ciclano@qa.com"
+    },
+    {
+      "name": "Beltrano",
+      "email": "beltrano@qa.com"
+    }
+  ],
+  "batchCreationCandidates": [
+    {
+      "name": "Batch User One",
+      "password": "Test@123",
+      "isAdmin": false
+    },
+    {
+      "name": "Batch User Two",
+      "password": "Test@123",
+      "isAdmin": false
+    },
+    {
+      "name": "Batch Admin",
+      "password": "Admin@123",
+      "isAdmin": true
+    }
+  ],
+  "updateProfiles": {
+    "userUpdated": {
+      "name": "CRUD User Updated",
+      "isAdmin": false
+    },
+    "adminUpdated": {
+      "name": "CRUD Admin Updated",
+      "isAdmin": true
+    }
+  }
+}
