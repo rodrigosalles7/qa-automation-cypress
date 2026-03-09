@@ -205,6 +205,22 @@ Relevant generated files:
 - `cypress/reports/run-results.json`
 - `cypress/reports/test-steps.json`
 
+### Reports via GitHub Pages (gh-pages)
+
+You can view the consolidated test report online (without running the project locally) at:
+
+- https://rodrigosalles7.github.io/qa-automation-cypress/cypress/reports/summary.html
+
+What you'll find at this link:
+
+- Summary of API and frontend execution status
+- Passed and failed tests count
+- Step-level details and links to failure screenshots (when available)
+
+Usage note:
+
+- Open the link in your browser and refresh after new report publications to see the latest available version.
+
 About the consolidated summary:
 
 - The script auto-detects run scope (`api`, `frontend`, or `full`).
